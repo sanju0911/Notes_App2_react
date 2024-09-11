@@ -1,11 +1,17 @@
 .app {
   text-align: center;
-  padding: 20px;
 }
 
-button {
-  margin-top: 20px;
+.addButton {
+  background-color: green;
+  color: white;
+  border: none;
   padding: 10px 20px;
-  font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+}
+
+.addButton:hover {
+  background-color: darkgreen;
 }
