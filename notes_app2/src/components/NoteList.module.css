@@ -1,0 +1,17 @@
+.notesList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.notesList .note {
+  width: 80%;
+  max-width: 500px;
+}
+.notesList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
