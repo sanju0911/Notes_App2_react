@@ -1,40 +1,26 @@
-
 import styles from "../css/NOTELIST.module.css";
 import NOTE from "../components/NOTE";
-const NOTELIST = ({ notes, Handledelete, Handleedit, searchnote }) => {
-  if (searchnote) {
-    return (
-      <div className={styles.noteListContainer}>
-        {Array.isArray(notes) ? (
-          searchnote.map((note) => (
-            <div key={note.title} className={styles.noteItem}>
-              <NOTE
-                id={note.id}
-                title={note.title}
-                description={note.description}
-                Handledelete={Handledelete}
-                Handleedit={Handledelete}
-              ></NOTE>
-            </div>
-          ))
-        ) : (
-          <p>No notes available.</p>
-        )}
-      </div>
-    );
-  }
+import { NotesContext } from "../contexts/NotesContext";
+
+import { useContext } from "react";
+
+const NOTELIST = ({ Handledelete, Handleedit }) => {
+  const { notes, searchnote } = useContext(NotesContext);
+
+  const displayedNotes = searchnote.length ? searchnote : notes;
+
   return (
     <div className={styles.noteListContainer}>
-      {Array.isArray(notes) ? (
-        notes.map((note) => (
-          <div key={note.title} className={styles.noteItem}>
+      {Array.isArray(displayedNotes) && displayedNotes.length > 0 ? (
+        displayedNotes.map((note) => (
+          <div key={note.id} className={styles.noteItem}>
             <NOTE
               id={note.id}
               title={note.title}
               description={note.description}
               Handledelete={Handledelete}
-              Handleedit={Handledelete}
-            ></NOTE>
+              Handleedit={Handleedit}
+            />
           </div>
         ))
       ) : (

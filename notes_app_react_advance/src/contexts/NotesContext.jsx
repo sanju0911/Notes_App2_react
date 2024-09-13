@@ -56,3 +56,5 @@ export const NotesProvider = ({ children }) => {
     </NotesContext.Provider>
   );
 };
+
+export default NotesProvider;

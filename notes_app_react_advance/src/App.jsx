@@ -32,13 +32,20 @@ const APP = () => {
       <h4>Total notes: {notes.length}</h4>
       <h4>Search notes: {searchnote.length}</h4>
 
-      <NOTELIST
-        notes={searchnote.length ? searchnote : notes}
-        Handledelete={deleteNote}
-        Handleedit={editNote}
-      />
+      <NOTELIST Handledelete={deleteNote} Handleedit={editNote} />
     </div>
   );
+  // return (
+  //   <NotesContext.Provider>
+  //     <>
+  //       <ADDNOTE />
+  //       <SEARCHNOTE />
+  //       <NOTELIST />
+  //       <h4>Total notes: {notes.length}</h4>
+  //       <h4>Search notes: {searchnote.length}</h4>
+  //     </>
+  //   </NotesContext.Provider>
+  // );
 };
 
 export default APP;
