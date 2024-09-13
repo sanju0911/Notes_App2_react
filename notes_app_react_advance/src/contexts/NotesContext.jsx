@@ -22,12 +22,7 @@ export const NotesProvider = ({ children }) => {
   };
 
   const editNote = (id, newTitle, newDescription) => {
-    const updatedNotes = notes.map((note) =>
-      note.id === id
-        ? { ...note, title: newTitle, description: newDescription }
-        : note
-    );
-    setNotes(updatedNotes);
+    console.log("updated");
   };
 
   const searchNotes = (title) => {
