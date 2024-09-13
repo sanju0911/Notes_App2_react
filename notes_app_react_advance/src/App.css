@@ -1,0 +1,12 @@
+
+.centered-button {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.centered-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
