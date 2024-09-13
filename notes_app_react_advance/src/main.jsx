@@ -1,10 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+// src/index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { NotesProvider } from "./contexts/NotesContext";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.render(
+  <NotesProvider>
     <App />
-  </StrictMode>,
-)
+  </NotesProvider>,
+  document.getElementById("root")
+);

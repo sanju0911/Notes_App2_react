@@ -1,50 +1,20 @@
-import { useState } from "react";
+import React, { useContext } from "react";
+import { NotesContext } from "./contexts/NotesContext";
 import ADDNOTE from "./components/ADDNOTE";
 import NOTELIST from "./components/NOTELIST";
 import SEARCHNOTE from "./components/SEARCHNOTE";
 
 const APP = () => {
-  const [isPortalOpen, setIsPortalOpen] = useState(false);
-  const [notes, setnotes] = useState([
-    {
-      id: 1,
-      title: "Note 1",
-      description: "This is the first note.",
-    },
-    {
-      id: 2,
-      title: "Note 2",
-      description: "This is the second note.",
-    },
-  ]);
-  const [searchnote, setsearchnote] = useState("");
-
-  const Handlesubmit = (title, description) => {
-    const newnote = [
-      ...notes,
-      { id: notes.length + 1, title: title, description: description },
-    ];
-    setnotes(newnote);
-    setIsPortalOpen(false);
-  };
-
-  const Handledelete = (id) => {
-    const newnote = notes.filter((note) => id !== note.id);
-    setnotes(newnote);
-  };
-
-  const Handleedit = (id, description) => {
-    console.log(id, description);
-  };
-
-  const HandleSearch = (title) => {
-    if (title === "") {
-      setsearchnote("");
-      return;
-    }
-    const newnote = notes.filter((note) => title === note.title);
-    setsearchnote(newnote);
-  };
+  const {
+    notes,
+    isPortalOpen,
+    setIsPortalOpen,
+    addNote,
+    deleteNote,
+    editNote,
+    searchNotes,
+    searchnote,
+  } = useContext(NotesContext);
 
   return (
     <div>
@@ -55,17 +25,17 @@ const APP = () => {
           </button>
         </div>
       )}
-      {isPortalOpen && <ADDNOTE Handlesubmit={Handlesubmit} />}
+      {isPortalOpen && <ADDNOTE Handlesubmit={addNote} />}
 
-      <SEARCHNOTE HandleSearch={HandleSearch} />
+      <SEARCHNOTE HandleSearch={searchNotes} />
 
       <h4>Total notes: {notes.length}</h4>
       <h4>Search notes: {searchnote.length}</h4>
 
       <NOTELIST
         notes={searchnote.length ? searchnote : notes}
-        Handledelete={Handledelete}
-        Handleedit={Handleedit}
+        Handledelete={deleteNote}
+        Handleedit={editNote}
       />
     </div>
   );
