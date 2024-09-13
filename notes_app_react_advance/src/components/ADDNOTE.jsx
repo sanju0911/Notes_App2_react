@@ -1,4 +1,3 @@
-// src/components/AddNotePortal.js
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "../css/ADDNOTE.module.css";
