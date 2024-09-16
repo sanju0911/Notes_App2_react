@@ -1,8 +1,5 @@
 import { createContext } from "react";
 
-const NotesContext = createContext({
-  notes: [],
-  filteredNotes: [],
-});
+const NotesContext = createContext();
 
 export default NotesContext;

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/SEARCHNOTE.module.css";
+import NotesContext from "../contexts/NotesContext";
 
-const SearchNotes = ({ handleSearch }) => {
+const SearchNotes = () => {
+  const { handleSearch } = useContext(NotesContext);
   const [search, setSearch] = useState("");
 
   const handleSearching = (e) => {

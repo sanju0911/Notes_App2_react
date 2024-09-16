@@ -3,7 +3,7 @@ import styles from "../css/NOTELIST.module.css";
 import { useContext } from "react";
 import NotesContext from "../contexts/NotesContext";
 
-const NOTELIST = ({ handleDelete, handleEdit }) => {
+const NOTELIST = () => {
   const { notes, filteredNotes } = useContext(NotesContext);
 
   // Determine which notes to display
@@ -18,8 +18,7 @@ const NOTELIST = ({ handleDelete, handleEdit }) => {
             id={note.id}
             title={note.title}
             description={note.description}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
+           
           />
         ))
       ) : (

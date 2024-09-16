@@ -27,14 +27,13 @@ const APP = () => {
       { id: notes.length + 1, title: title, description: description },
     ];
     setNotes(newNote);
-    setFilteredNotes(newNote);
+
     setIsPortalOpen(false);
   };
 
   const handleDelete = (id) => {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
-    setFilteredNotes(updatedNotes);
   };
 
   const handleEdit = (id, description) => {
@@ -58,19 +57,28 @@ const APP = () => {
   };
 
   return (
-    <NotesContext.Provider value={{ notes, filteredNotes }}>
+    <NotesContext.Provider
+      value={{
+        notes,
+        filteredNotes,
+        handleSubmit,
+        handleSearch,
+        handleDelete,
+        handleEdit,
+      }}
+    >
       <div>
         {!isPortalOpen && (
           <button className={styles.BUTTONCENTER} onClick={handlePortal}>
             ADD NOTES
           </button>
         )}
-        {isPortalOpen && <ADDNOTE Handlesubmit={handleSubmit} />}
+        {isPortalOpen && <ADDNOTE />}
 
-        <SEARCHNOTE handleSearch={handleSearch} />
+        <SEARCHNOTE />
         <h4>Total notes: {notes.length}</h4>
         <h4>Search results: {filteredNotes.length}</h4>
-        <NOTELIST handleDelete={handleDelete} handleEdit={handleEdit} />
+        <NOTELIST />
       </div>
     </NotesContext.Provider>
   );

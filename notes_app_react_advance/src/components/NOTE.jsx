@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import styles from "../css/NOTELIST.module.css";
+import NotesContext from "../contexts/NotesContext";
 
-const NOTE = ({ id, title, description, handleDelete, handleEdit }) => {
+const NOTE = ({ id, title, description }) => {
+  const { handleDelete, handleEdit } = useContext(NotesContext);
   const HandleEditClick = () => {
     handleEdit(id, description);
   };

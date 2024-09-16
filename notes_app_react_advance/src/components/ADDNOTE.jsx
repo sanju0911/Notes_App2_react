@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/ADDNOTE.module.css";
 import ReactDOM from "react-dom";
+import NotesContext from "../contexts/NotesContext";
 
-const ADDNOTE = ({ Handlesubmit }) => {
+const ADDNOTE = () => {
+  const { handleSubmit } = useContext(NotesContext);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
 
@@ -14,7 +16,7 @@ const ADDNOTE = ({ Handlesubmit }) => {
   };
 
   const Handledata = () => {
-    Handlesubmit(title, description);
+    handleSubmit(title, description);
     settitle("");
     setdescription("");
   };
