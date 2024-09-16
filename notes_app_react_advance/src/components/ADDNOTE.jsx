@@ -1,18 +1,25 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import styles from "../css/ADDNOTE.module.css";
+import ReactDOM from "react-dom";
 
-const AddNoteForm = ({
-  title,
-  setTitle,
-  description,
-  setDescription,
-  onSubmit,
-}) => {
-  const handleTitleChange = (event) => setTitle(event.target.value);
-  const handleDescriptionChange = (event) => setDescription(event.target.value);
+const ADDNOTE = ({ Handlesubmit }) => {
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
 
-  return (
+  const HandleName = (event) => {
+    settitle(event.target.value);
+  };
+  const HandleDescription = (event) => {
+    setdescription(event.target.value);
+  };
+
+  const Handledata = () => {
+    Handlesubmit(title, description);
+    settitle("");
+    setdescription("");
+  };
+
+  return ReactDOM.createPortal(
     <div className={styles.container}>
       <div className={styles.formGroup}>
         <label htmlFor="noteName" className={styles.label}>
@@ -23,8 +30,8 @@ const AddNoteForm = ({
           id="noteName"
           placeholder="Enter your title"
           className={styles.input}
+          onChange={HandleName}
           value={title}
-          onChange={handleTitleChange}
         />
       </div>
 
@@ -37,42 +44,13 @@ const AddNoteForm = ({
           id="noteDescription"
           placeholder="Enter your description"
           className={styles.input}
-          value={description}
-          onChange={handleDescriptionChange}
+          onChange={HandleDescription}
         />
       </div>
 
-      <button className={styles.button} onClick={onSubmit}>
+      <button className={styles.button} onClick={Handledata}>
         ADD
       </button>
-    </div>
-  );
-};
-
-const ADDNOTE = ({ Handlesubmit }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleSubmit = () => {
-    if (title.trim() && description.trim()) {
-      Handlesubmit(title, description);
-      setTitle("");
-      setDescription("");
-    }
-  };
-
-  return ReactDOM.createPortal(
-    <div className={styles.portalContainer}>
-      <div className={styles.portalContent}>
-        <AddNoteForm
-          title={title}
-          setTitle={setTitle}
-          description={description}
-          setDescription={setDescription}
-          onSubmit={handleSubmit}
-        />
-      </div>
-      <div className={styles.overlay} onClick={() => setTitle("")}></div>
     </div>,
     document.getElementById("addnote")
   );

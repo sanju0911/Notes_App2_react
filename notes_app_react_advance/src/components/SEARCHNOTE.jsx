@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../css/SEARCHNOTE.module.css";
-import { useState } from "react";
 
-const SEARCHNOTE = ({ HandleSearch }) => {
-  const [searchtitle, setsearchtitle] = useState("");
+const SearchNotes = ({ handleSearch }) => {
+  const [search, setSearch] = useState("");
 
-  const Handlesearchtitle = (event) => {
-    setsearchtitle(event.target.value);
+  const handleSearching = (e) => {
+    setSearch(e.target.value);
   };
-  const Handlesearchbutton = () => {
-    HandleSearch(searchtitle);
-    setsearchtitle("");
+
+  const handleSearchButton = () => {
+    handleSearch(search);
+    setSearch("");
   };
 
   return (
@@ -19,14 +19,14 @@ const SEARCHNOTE = ({ HandleSearch }) => {
         type="text"
         placeholder="Enter title"
         className={styles.searchInput}
-        onChange={Handlesearchtitle}
-        value={searchtitle}
+        onChange={handleSearching}
+        value={search}
       />
-      <button className={styles.searchButton} onClick={Handlesearchbutton}>
+      <button className={styles.searchButton} onClick={handleSearchButton}>
         Search
       </button>
     </div>
   );
 };
 
-export default SEARCHNOTE;
+export default SearchNotes;

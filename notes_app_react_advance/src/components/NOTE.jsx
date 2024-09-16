@@ -1,24 +1,27 @@
 import styles from "../css/NOTELIST.module.css";
 
-const NOTE = ({ id, title, description, Handledelete, Handleedit }) => {
-  const Handleeditbutton = () => {
-    Handleedit(id);
+const NOTE = ({ id, title, description, handleDelete, handleEdit }) => {
+  const HandleEditClick = () => {
+    handleEdit(id, description);
   };
-  const Handledeletebutton = () => {
-    Handledelete(id);
+
+  const HandleDeleteClick = () => {
+    handleDelete(id);
   };
 
   return (
-    <>
-      <h1 className={styles.noteName}>{title}</h1>
-      <h2 className={styles.noteDescription}>{description}</h2>
-      <button className={styles.editButton} onClick={Handleeditbutton}>
-        Edit
-      </button>
-      <button className={styles.deleteButton} onClick={Handledeletebutton}>
-        Delete
-      </button>
-    </>
+    <div className={styles.noteItem}>
+      <h2 className={styles.noteTitle}>{title}</h2>
+      <p className={styles.noteDescription}>{description}</p>
+      <div className={styles.buttonGroup}>
+        <button className={styles.editButton} onClick={HandleEditClick}>
+          Edit
+        </button>
+        <button className={styles.deleteButton} onClick={HandleDeleteClick}>
+          Delete
+        </button>
+      </div>
+    </div>
   );
 };
 

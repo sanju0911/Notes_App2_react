@@ -1,51 +1,79 @@
-import React, { useContext } from "react";
-import { NotesContext } from "./contexts/NotesContext";
+import { useState } from "react";
 import ADDNOTE from "./components/ADDNOTE";
 import NOTELIST from "./components/NOTELIST";
 import SEARCHNOTE from "./components/SEARCHNOTE";
+import styles from "./App.module.css";
+import NotesContext from "./contexts/NotesContext";
 
 const APP = () => {
-  const {
-    notes,
-    isPortalOpen,
-    setIsPortalOpen,
-    addNote,
-    deleteNote,
-    editNote,
-    searchNotes,
-    searchnote,
-  } = useContext(NotesContext);
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: "Note 1",
+      description: "This is the first note.",
+    },
+    {
+      id: 2,
+      title: "Note 2",
+      description: "This is the second note.",
+    },
+  ]);
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
+  const [filteredNotes, setFilteredNotes] = useState([]);
+
+  const handleSubmit = (title, description) => {
+    const newNote = [
+      ...notes,
+      { id: notes.length + 1, title: title, description: description },
+    ];
+    setNotes(newNote);
+    setFilteredNotes(newNote);
+    setIsPortalOpen(false);
+  };
+
+  const handleDelete = (id) => {
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
+    setFilteredNotes(updatedNotes);
+  };
+
+  const handleEdit = (id, description) => {
+    console.log(id, description);
+  };
+
+  const handleSearch = (title) => {
+    if (title === "") {
+      setFilteredNotes("");
+      return;
+    }
+
+    const filtered = notes.filter((note) =>
+      note.title.toLowerCase().includes(title.toLowerCase())
+    );
+    setFilteredNotes(filtered);
+  };
+
+  const handlePortal = () => {
+    setIsPortalOpen(!isPortalOpen);
+  };
 
   return (
-    <div>
-      {!isPortalOpen && (
-        <div className="centered-button">
-          <button onClick={() => setIsPortalOpen(true)}>
-            Click to Add Notes
+    <NotesContext.Provider value={{ notes, filteredNotes }}>
+      <div>
+        {!isPortalOpen && (
+          <button className={styles.BUTTONCENTER} onClick={handlePortal}>
+            ADD NOTES
           </button>
-        </div>
-      )}
-      {isPortalOpen && <ADDNOTE Handlesubmit={addNote} />}
+        )}
+        {isPortalOpen && <ADDNOTE Handlesubmit={handleSubmit} />}
 
-      <SEARCHNOTE HandleSearch={searchNotes} />
-
-      <h4>Total notes: {notes.length}</h4>
-      <h4>Search notes: {searchnote.length}</h4>
-
-      <NOTELIST Handledelete={deleteNote} Handleedit={editNote} />
-    </div>
+        <SEARCHNOTE handleSearch={handleSearch} />
+        <h4>Total notes: {notes.length}</h4>
+        <h4>Search results: {filteredNotes.length}</h4>
+        <NOTELIST handleDelete={handleDelete} handleEdit={handleEdit} />
+      </div>
+    </NotesContext.Provider>
   );
-  // return (
-  //   <NotesContext.Provider>
-  //     <>
-  //       <ADDNOTE />
-  //       <SEARCHNOTE />
-  //       <NOTELIST />
-  //       <h4>Total notes: {notes.length}</h4>
-  //       <h4>Search notes: {searchnote.length}</h4>
-  //     </>
-  //   </NotesContext.Provider>
-  // );
 };
 
 export default APP;

@@ -1,0 +1,8 @@
+.BUTTONCENTER {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
